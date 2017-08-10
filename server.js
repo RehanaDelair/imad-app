@@ -5,19 +5,37 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articleOne={
-    title:'Article One | Rehana Delair',
-    heading:'Article One',
-    date:'August 10, 2017',
-    content:`<p>
-                This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) 
-            </p>
-            <p>
-                This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) 
-            </p>
-            <p>
-                This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) 
-            </p>`
+var articles:{
+    articleOne={
+        title:'Article One | Rehana Delair',
+        heading:'Article One',
+        date:'August 10, 2017',
+        content:`<p>
+                    This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) 
+                </p>
+                <p>
+                    This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) 
+                </p>
+                <p>
+                    This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) 
+                </p>`
+    },
+    articleTwo={
+        title:'Article Two | Rehana Delair',
+        heading:'Article Two',
+        date:'August 11, 2017',
+        content:`<p>
+                    This is my second article.
+                </p>`
+    },
+    articleThree={
+        title:'Article Three | Rehana Delair',
+        heading:'Article Three',
+        date:'August 12, 2017',
+        content:`<p>
+                    This is my third article.
+                </p>`
+    }
 };
 
 function createTemplate(data){
@@ -67,11 +85,11 @@ app.get('/article-one',function(req,res){
 });
 
 app.get('/article-two',function(req,res){
-    res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
+   res.send(createTemplate(articleTwo));
 });
 
 app.get('/article-three',function(req,res){
-    res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
+   res.send(createTemplate(articleThree));
 });
 
 app.get('/ui/style.css', function (req, res) {
