@@ -104,9 +104,9 @@ app.get('/ui/main.js', function (req, res) {
 });
 
 var names=[];
-app.get('/submit-name/:name', function (req, res) {
+app.get('/submit-name', function (req, res) { // URL: /submit-name?name=xxx
     //Get the Name from the request
-    var name= req.params.name; 
+    var name= req.query.name; 
     
     names.push(name);
     // JSON; Javascript Object Notation
