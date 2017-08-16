@@ -14,39 +14,6 @@ var config = {
 var app = express();
 app.use(morgan('combined'));
 
-var articles={
-    'article-one':{
-        title:'Article One | Rehana Delair',
-        heading:'Article One',
-        date:'August 10, 2017',
-        content:`<p>
-                    This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) 
-                </p>
-                <p>
-                    This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) 
-                </p>
-                <p>
-                    This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) This is my first article. I am just a lazy person. So I will copy this lines. What I am blabbering about. ;) 
-                </p>`
-    },
-    'article-two':{
-        title:'Article Two | Rehana Delair',
-        heading:'Article Two',
-        date:'August 11, 2017',
-        content:`<p>
-                    This is my second article.
-                </p>`
-    },
-    'article-three':{
-        title:'Article Three | Rehana Delair',
-        heading:'Article Three',
-        date:'August 12, 2017',
-        content:`<p>
-                    This is my third article.
-                </p>`
-    }
-};
-
 function createTemplate(data){
     var title=data.title;
     var heading=data.heading;
