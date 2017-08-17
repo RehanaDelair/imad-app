@@ -10,15 +10,12 @@ submit.onclick = function() {
       if (request.readyState === XMLHttpRequest.DONE){
           //Take some action
           if (request.status === 200) {
-              //Capture a list of names and render it as a list
-              var names = request.responseText;
-              names = JSON.parse(names);
-              var list = "";
-              for(var i=0; i<names.length; i++){
-                  list += '<li>' + names[i] + '</li>';
-              }
-              var ul = document.getElementById('name_list');
-              ul.innerHTML = list;
+              console.log("user is logged in");
+              alert('Login Sucessfull');
+          } else if (request.status === 403) {
+             alert('Username/ Password is incorrect');
+          } else if (request.status === 500) {
+              alert('Someting went wrong on the server');
           }
       }
     };
@@ -29,6 +26,7 @@ submit.onclick = function() {
     console.log(username);
     console.log(password);
     request.open('POST', 'http://rehanad10.imad.hasura-app.io/login', true);
+    request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify({username: username, password: password}));
     
 };
