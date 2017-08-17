@@ -56,4 +56,4 @@ submit.onclick = function() {
     request.open('GET', 'http://rehanad10.imad.hasura-app.io/submit-name?name=' + name, true);
     request.send();
     
-}
+};
