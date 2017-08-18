@@ -96,9 +96,11 @@ app.get('/hash/:input', function (req, res) {
 });
 
 app.post('/create-user', function (req, res) {
+    console.log(`'here1`);
     //username, password
     var username = req.body.username;
     var password = req.body.password;
+    console.log(`here2`);
     
     pool.query('select count(*) from "user" where username=$1', [username], function (err, result){
         if(err) {
