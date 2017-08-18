@@ -99,10 +99,10 @@ app.post('/create-user', function (req, res) {
     //username, password
     var username = req.body.username;
     var password = req.body.password;
-    console.log("here");
+    
     pool.query('select count(*) from "user" where username=$1', [username], function (err, result){
         if(err) {
-            res.status(500).send(err.toString());
+            res.status(500).send(err.toString()+" this one");
         } else {
             console.log(JSON.stringify(result));
             res.sendFile("User sucessfully created " + username);
@@ -110,7 +110,7 @@ app.post('/create-user', function (req, res) {
     });
     
     
-    var salt = crypto.randomBytes(128).toString('hex');
+    /*var salt = crypto.randomBytes(128).toString('hex');
     var dbString= hash(password, salt);
     pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username, dbString], function (err, result){
         if(err) {
@@ -118,7 +118,7 @@ app.post('/create-user', function (req, res) {
         } else {
             res.sendFile("User sucessfully created " + username);
         }
-    });
+    });*/
 });
 
 app.get('/check-login', function (req, res) {
