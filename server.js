@@ -90,39 +90,6 @@ app.post('/login', function (req, res) {
     });
 });
 
-app.post('/register', function (req, res) {
-    //username, password
-    var username = req.body.username;
-    var password = req.body.password;
-    
-    pool.query('insert into "user" (username, password) values ($1, $2)', [username, hashedPassword], function (err, result){
-        if(err) {
-            res.status(500).send(err.toString());
-        } else {
-            if(result.rows.length === 0) {
-                res.status(404).send('username/password is invalid');
-            } else {
-                //Match the password
-                var dbString = result.rows[0].password;
-                var salt = dbString.split("$") [2];
-                var hashedPassword = hash(password, salt);
-                if(hashedPassword === dbString){
-                    
-                    //Set the session
-                    req.session.auth = {userId: result.rows[0].id};
-                    
-                    res.send("Credentials are correct");
-                    
-                } else {
-                    res.send("username/password is invalid");
-                }
-            }
-        }
-    });
-    
-    
-});
-
 app.get('/hash/:input', function (req, res) {
    var hashedString = hash(req.params.input, 'this-is-salt-changed');
    res.send(hashedString);
