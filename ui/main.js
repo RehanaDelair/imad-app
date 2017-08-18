@@ -27,6 +27,8 @@ submit.onclick = function() {
     console.log(password);
     request.open('POST', 'http://rehanad10.imad.hasura-app.io/login', true);
     request.setRequestHeader('Content-Type', 'application/json');
+    alert("here1");
     request.send(JSON.stringify({username: username, password: password}));
+    alert("here2");
     
 };
