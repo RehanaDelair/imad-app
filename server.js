@@ -99,7 +99,7 @@ app.post('/create-user', function (req, res) {
     //username, password
     var username = req.body.username;
     var password = req.body.password;
-    
+    console.log("here");
     pool.query('select count(*) from "user" where username=$1', [username], function (err, result){
         if(err) {
             res.status(500).send(err.toString());
