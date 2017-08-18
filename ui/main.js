@@ -15,9 +15,9 @@ login.onclick = function() {
           } else if (request.status === 403) {
              alert('Username/ Password is incorrect');
           } else if (request.status === 500) {
-              alert('Someting went wrong on the server ' + request.statusText);
+              alert('Someting went wrong on the server' + request.statusText);
           } else {
-              alert('Someting went wrong on the server ' + request.statusText);
+              alert('Someting went wrong on the server' + request.statusText);
           }
       }
     };
@@ -44,7 +44,9 @@ register.onclick = function() {
       if (request.readyState === XMLHttpRequest.DONE){
           //Take some action
           if (request.status === 200) {
-              alert('Registration Sucessfull');
+              alert(request.responseText);
+          } else if (request.status === 403) {
+             alert('Username/ Password is incorrect');
           } else if (request.status === 500) {
               alert('Someting went wrong on the server' + request.statusText);
           } else {
