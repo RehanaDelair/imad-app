@@ -44,8 +44,7 @@ register.onclick = function() {
       if (request.readyState === XMLHttpRequest.DONE){
           //Take some action
           if (request.status === 200) {
-              console.log("user is logged in 1");
-              alert('Login Sucessfull');
+              alert('Registration Sucessfull');
           } else if (request.status === 403) {
              alert('Username/ Password is incorrect');
           } else if (request.status === 500) {
