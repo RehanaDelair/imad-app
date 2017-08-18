@@ -82,10 +82,9 @@ app.post('/login', function (req, res) {
     
     pool.query('select * from "user" where username = $1', [username, hashedPassword], function (err, result){
         if(err) {
-            log(err.toString());
             res.status(500).send(err.toString());
         } else {
-            res.send("Sucessfully registered");
+            res.send("Sucessfully logged in!");
         }
     });
 });
@@ -102,8 +101,9 @@ app.post('/create-user', function (req, res) {
     var password = req.body.password;
     console.log(`here2`);
     
-    pool.query('select count(*) from "user" where username=$1', [username], function (err, result){
+    pool.query('select count(*) from "user" where username = $1', [username], function (err, result){
         if(err) {
+            log(err.toString());
             res.status(500).send(err.toString()+" this one");
         } else {
             console.log(JSON.stringify(result));
@@ -118,7 +118,7 @@ app.post('/create-user', function (req, res) {
         if(err) {
             res.status(500).send(err.toString());
         } else {
-            res.sendFile("User sucessfully created " + username);
+            res.send("User sucessfully created " + username);
         }
     });*/
 });
