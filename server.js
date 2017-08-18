@@ -73,17 +73,22 @@ function hash (input, salt) {
 }
 
 app.post('/login', function (req, res) {
+    var msg="";
     //username, password
     var username = req.body.username;
     var password = req.body.password;
+    msg+='here1';
     
     pool.query('SELECT * FROM "user" WHERE username=$1', username, function (err, result){
         if(err) {
+            msg+="here2";
             res.status(500).send(err.toString());
         } else {
             if(result.rows.length === 0) {
+                msg+="here3";
                 res.status(404).send('username/ password is invalid');
             } else {
+                msg+="here4";
                 //Match the password
                 var dbString = result.rows[0].password;
                 var salt = dbString.split('$');
