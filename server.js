@@ -82,11 +82,14 @@ app.post('/login', function (req, res) {
     pool.query('SELECT * FROM "user" WHERE username=$1', username, function (err, result){
         if(err) {
             msg+="here2";
-            res.status(500).send(err.toString()+msg);
+            if(res.status === 500)
+                res.status(500).send(err.toString());
+            else if(res.status === 502)
+                res.status(502).send(err.toString()+msg);
         } else {
             if(result.rows.length === 0) {
                 msg+="here3";
-                res.status(404).send('username/ password is invalid'+msg);
+                res.status(404).send('username/ password is invalid');
             } else {
                 msg+="here4";
                 //Match the password
@@ -98,10 +101,10 @@ app.post('/login', function (req, res) {
                     //Set the session
                     req.session.auth = {userId: result.rows[0].id};
                     
-                    res.send("Credentials are correct"+msg);
+                    res.send("Credentials are correct");
                     
                 } else {
-                    res.send("username/ password is invalid"+msg);
+                    res.send("username/ password is invalid");
                 }
             }
         }
