@@ -1,6 +1,6 @@
 //submit username, password to login
-var submit = document.getElementById('submit_btn');
-submit.onclick = function() {
+var login = document.getElementById('login_btn');
+login.onclick = function() {
     
     //Create a request object
     var request = new XMLHttpRequest();
@@ -30,4 +30,9 @@ submit.onclick = function() {
     request.open('POST', 'http://rehanad10.imad.hasura-app.io/login', true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify({username: username, password: password}));
+};
+
+var register = document.getElementById('register_btn');
+register.onclick = function() {
+    
 };
