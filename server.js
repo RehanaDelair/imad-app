@@ -95,18 +95,18 @@ app.get('/hash/:input', function (req, res) {
 });
 
 app.post('/create-user', function (req, res) {
-    console.log(`'here1`);
     //username, password
     var username = req.body.username;
     var password = req.body.password;
-    console.log(`here2`);
     
     pool.query('select count(*) from "user" where username = $1', [username], function (err, result){
         if(err) {
             res.status(500).send(err.toString());
         } else {
-            console.log(JSON.stringify(result));
-            console.log(result['rowCount']);
+            console.log(result.rowCount);
+            if(result.rowCount > 0){
+                
+            }
             res.send("User sucessfully created " + username);
         }
     });
