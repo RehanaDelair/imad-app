@@ -73,22 +73,35 @@ function hash (input, salt) {
 }
 
 app.post('/login', function (req, res) {
-    var msg="";
     //username, password
     var username = req.body.username;
     var password = req.body.password;
-    msg+='here1';
     
-    pool.query('select * from "user" where username = $1', [username], function (err, result){
+    var salt='this-is-salt-changed';
+    var hashedPassword = hash(password, salt);
+    
+    pool.query('select * from "user" where username = $1', [username, hashedPassword], function (err, result){
         if(err) {
-            msg+="here2";
+            log(err.toString());
+            res.status(500).send(err.toString());
+        } else {
+            res.send("Sucessfully registered");
+        }
+    });
+});
+
+app.post('/register', function (req, res) {
+    //username, password
+    var username = req.body.username;
+    var password = req.body.password;
+    
+    pool.query('insert into "user" (username, password) values ($1, $2)', [username, hashedPassword], function (err, result){
+        if(err) {
             res.status(500).send(err.toString());
         } else {
             if(result.rows.length === 0) {
-                msg+="here3";
                 res.status(404).send('username/password is invalid');
             } else {
-                msg+="here4";
                 //Match the password
                 var dbString = result.rows[0].password;
                 var salt = dbString.split("$") [2];
@@ -106,6 +119,8 @@ app.post('/login', function (req, res) {
             }
         }
     });
+    
+    
 });
 
 app.get('/hash/:input', function (req, res) {
