@@ -103,7 +103,6 @@ app.post('/create-user', function (req, res) {
     
     pool.query('select count(*) from "user" where username = $1', [username], function (err, result){
         if(err) {
-            log(err.toString());
             res.status(500).send(err.toString()+" this one");
         } else {
             console.log(JSON.stringify(result));
