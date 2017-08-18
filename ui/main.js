@@ -15,9 +15,9 @@ submit.onclick = function() {
           } else if (request.status === 403) {
              alert('Username/ Password is incorrect');
           } else if (request.status === 500) {
-              alert('Someting went wrong on the server');
+              alert('Someting went wrong on the server' + request.statusText);
           } else {
-              alert('Someting went wrong on the server else part' + request.statusText);
+              alert('Someting went wrong on the server' + request.statusText);
           }
       }
     };
