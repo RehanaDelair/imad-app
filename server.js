@@ -91,7 +91,7 @@ app.post('/login', function (req, res) {
                 msg+="here4";
                 //Match the password
                 var dbString = result.rows[0].password;
-                var salt = dbString.split("$");
+                var salt = dbString.split("$") [2];
                 var hashedPassword = hash(password, salt);
                 if(hashedPassword === dbString){
                     
