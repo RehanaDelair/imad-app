@@ -103,6 +103,7 @@ app.post('/create-user', function (req, res) {
         if(err) {
             res.status(500).send(err.toString());
         } else {
+            console.log(result.rowCount);
             if(result.rowCount > 0){
                 res.send("Username already taken. Choose another Username");
             }else if(result.rowCount === 0){
