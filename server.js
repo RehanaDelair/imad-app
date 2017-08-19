@@ -105,22 +105,19 @@ app.post('/create-user', function (req, res) {
         } else {
             if(result.rowCount > 0){
                 res.send("Username already taken. Choose another Username");
-            }else{
-            res.send("User sucessfully created " + username);
+            }else if(result.rowCount === 0){
+                var salt = crypto.randomBytes(128).toString('hex');
+                var dbString= hash(password, salt);
+                pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username, dbString], function (err, result){
+                    if(err) {
+                        res.status(500).send(err.toString());
+                    } else {
+                        res.send("User sucessfully created");
+                    }
+                });
             }
         }
     });
-    
-    
-    /*var salt = crypto.randomBytes(128).toString('hex');
-    var dbString= hash(password, salt);
-    pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username, dbString], function (err, result){
-        if(err) {
-            res.status(500).send(err.toString());
-        } else {
-            res.send("User sucessfully created " + username);
-        }
-    });*/
 });
 
 app.get('/check-login', function (req, res) {
