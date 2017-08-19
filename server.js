@@ -77,14 +77,23 @@ app.post('/login', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
     
-    var salt='this-is-salt-changed';
-    var hashedPassword = hash(password, salt);
-    
-    pool.query('select * from "user" where username = $1', [username, hashedPassword], function (err, result){
+    pool.query('select * from "user" where username = $1', [username], function (err, result){
         if(err) {
             res.status(500).send(err.toString());
         } else {
-            res.send("Sucessfully logged in!");
+            if(result.rows.length === 0){
+                res.status(403).send("Username/ Password is invalid");
+            }else{
+                //Match the password
+                var dbString = result.rows[0].password;
+                var salt = dbString.split("$")[2];
+                var hashedPassword = hash(password, salt);
+                if(hashedPassword == dbString){
+                    res.send("Sucessfully Logged in!");
+                } else{
+                    res.status(403).send("Username/ Password is invalid");
+                }
+            }
         }
     });
 });
@@ -103,10 +112,10 @@ app.post('/create-user', function (req, res) {
         if(err) {
             res.status(500).send(err.toString());
         } else {
-            console.log(JSON.stringify(result));
-            if(result.rowCount > 0){
-                res.send("Username already taken. Choose another Username");
-            }else if(result.rowCount === 0){
+            var count = parseInt(result.rows[0].count);
+            if(count > 0){
+                res.status(403).send("Username already taken. Choose another Username");
+            }else if(count === 0){
                 var salt = crypto.randomBytes(128).toString('hex');
                 var dbString= hash(password, salt);
                 pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username, dbString], function (err, result){
