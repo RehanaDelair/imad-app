@@ -45,12 +45,8 @@ register.onclick = function() {
           //Take some action
           if (request.status === 200) {
               alert(request.responseText);
-          } else if (request.status === 403) {
-             alert('Username/ Password is incorrect');
-          } else if (request.status === 500) {
-              alert('Someting went wrong on the server' + request.statusText);
           } else {
-              alert('Someting went wrong on the server' + request.statusText);
+              alert('Someting went wrong on the server ' + request.statusText);
           }
       }
     };
