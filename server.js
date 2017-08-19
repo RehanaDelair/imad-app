@@ -114,7 +114,7 @@ app.post('/create-user', function (req, res) {
         } else {
             var count = parseInt(result.rows[0].count);
             if(count > 0){
-                res.status(403).send("Username already taken. Choose another Username");
+                res.send("Username already taken. Choose another Username");
             }else if(count === 0){
                 var salt = crypto.randomBytes(128).toString('hex');
                 var dbString= hash(password, salt);
