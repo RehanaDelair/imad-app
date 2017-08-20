@@ -1,4 +1,4 @@
-function loadArticles(){
+function loadArticles() {
     var articleList = document.getElementById('article_list');
     var request = new XMLHttpRequest();
     
@@ -23,6 +23,34 @@ function loadArticles(){
         };
         
     request.open('GET', '/get-articles', true);
+    request.send();
+}
+
+function loadLoggedInUser(username) {
+    var login_area = document.getElementById('login');
+    login_area.innerHTML = 
+    `<input type='submit' value='logout' id='logout'/>
+    <br/>
+    <br/>
+    Hi `+ username;
+    
+}
+
+function checkLogin() {
+    var request = new XMLHttpRequest();
+    
+    request.onreadystatechange = function (){
+          if (request.readyState === XMLHttpRequest.DONE){
+              //Take some action
+              if (request.status === 200) {
+                  loadLoggedInUser(request.responseText);
+              } else {
+                  loadLogin();
+              }
+          }
+        };
+        
+    request.open('GET', '/check-login', true);
     request.send();
 }
 
@@ -91,4 +119,8 @@ register.onclick = function() {
     
 };
 
+//check if user is logged in
+checkLogIn();
+
+// Load articles
 loadArticles();
