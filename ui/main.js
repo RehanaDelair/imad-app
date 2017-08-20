@@ -11,6 +11,7 @@ request.onreadystatechange = function (){
               for(var i=0; i<articles.length; i++){
                   list += '<li> <a href= "http://rehanad10.imad.hasura-app.io/' + articles[i].title + '">' + articles[i].heading + '</a></li>';
               }
+              articleList.innerHTML = list;
               console.log(articles);
           } else
               alert('Someting went wrong on the server' + request.statusText);
