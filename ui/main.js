@@ -1,5 +1,17 @@
 var articleList = document.getElementById('article_list');
-request.open('GET', 'http://rehanad10.imad.hasura-app.io/', true);
+var request = new XMLHttpRequest();
+request.open('GET', 'http://rehanad10.imad.hasura-app.io/get-articles', true);
+request.send();
+request.onreadystatechange = function (){
+      if (request.readyState === XMLHttpRequest.DONE){
+          //Take some action
+          if (request.status === 200) {
+              var articles = request.responseText;
+              console.log(articles);
+          } else
+              alert('Someting went wrong on the server' + request.statusText);
+      }
+    };
 
 
 //submit username, password to login
