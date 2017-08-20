@@ -1,3 +1,4 @@
+alert("hi");
 //submit username, password to login
 var login = document.getElementById('login_btn');
 login.onclick = function() {
