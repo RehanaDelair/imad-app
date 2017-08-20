@@ -7,6 +7,7 @@ request.onreadystatechange = function (){
           //Take some action
           if (request.status === 200) {
               var articles = request.responseText;
+              articles = JSON.parse(articles);
               list = '';
               for(var i=0; i<articles.length; i++){
                   list += '<li> <a href= "http://rehanad10.imad.hasura-app.io/' + articles[i].title + '">' + articles[i].heading + '</a></li>';
