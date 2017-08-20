@@ -1,6 +1,6 @@
 var articleList = document.getElementById('article_list');
 var request = new XMLHttpRequest();
-request.open('GET', 'http://rehanad10.imad.hasura-app.io/get-articles', true);
+request.open('GET', '/get-articles', true);
 request.send();
 request.onreadystatechange = function (){
       if (request.readyState === XMLHttpRequest.DONE){
@@ -12,7 +12,7 @@ request.onreadystatechange = function (){
               for(var i=0; i<articles.length; i++){
                   var title=articles[i].title;
                   var heading=articles[i].heading;
-                  var date=articles[i].date.toDateString();
+                  var date=articles[i].date;
                   list += '<li> <a href= "http://rehanad10.imad.hasura-app.io/articles/' + title + '">' + heading + '</a> (' + date + ') </li>';
               }
               articleList.innerHTML = list;
