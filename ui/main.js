@@ -36,6 +36,10 @@ function loadLoggedInUser(username) {
     
 }
 
+function loadLogin() {
+    
+}
+
 function checkLogin() {
     var request = new XMLHttpRequest();
     
