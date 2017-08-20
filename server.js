@@ -185,7 +185,7 @@ app.get('/submit-name', function (req, res) { // URL: /submit-name?name=xxx
 });
 
 app.get('/get-articles', function(req, res){
-    pool.query("select title, date from article", function(err, result) {
+    pool.query("select title, heading, date from article", function(err, result) {
         if(err) {
             res.status(500).send(err.toString());
         } else {
