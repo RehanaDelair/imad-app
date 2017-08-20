@@ -1,8 +1,7 @@
 function loadArticles(){
     var articleList = document.getElementById('article_list');
     var request = new XMLHttpRequest();
-    request.open('GET', '/get-articles', true);
-    request.send();
+    
     request.onreadystatechange = function (){
           if (request.readyState === XMLHttpRequest.DONE){
               //Take some action
@@ -22,6 +21,9 @@ function loadArticles(){
                   alert('Someting went wrong on the server' + request.statusText);
           }
         };
+        
+    request.open('GET', '/get-articles', true);
+    request.send();
 }
 
 
@@ -54,7 +56,7 @@ login.onclick = function() {
     var password = document.getElementById('password').value;
     console.log(username);
     console.log(password);
-    request.open('POST', 'http://rehanad10.imad.hasura-app.io/login', true);
+    request.open('POST', '/login', true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify({username: username, password: password}));
     
