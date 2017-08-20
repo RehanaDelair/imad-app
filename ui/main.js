@@ -1,26 +1,28 @@
-var articleList = document.getElementById('article_list');
-var request = new XMLHttpRequest();
-request.open('GET', '/get-articles', true);
-request.send();
-request.onreadystatechange = function (){
-      if (request.readyState === XMLHttpRequest.DONE){
-          //Take some action
-          if (request.status === 200) {
-              var articles = request.responseText;
-              articles = JSON.parse(articles);
-              list = '';
-              for(var i=0; i<articles.length; i++){
-                  var title=articles[i].title;
-                  var heading=articles[i].heading;
-                  var date=articles[i].date.split('T')[0];
-                  list += '<li> <a href= "http://rehanad10.imad.hasura-app.io/articles/' + title + '">' + heading + '</a> (' + date + ') </li>';
-              }
-              articleList.innerHTML = list;
-              console.log(articles);
-          } else
-              alert('Someting went wrong on the server' + request.statusText);
-      }
-    };
+function loadArticles(){
+    var articleList = document.getElementById('article_list');
+    var request = new XMLHttpRequest();
+    request.open('GET', '/get-articles', true);
+    request.send();
+    request.onreadystatechange = function (){
+          if (request.readyState === XMLHttpRequest.DONE){
+              //Take some action
+              if (request.status === 200) {
+                  var articles = request.responseText;
+                  articles = JSON.parse(articles);
+                  list = '';
+                  for(var i=0; i<articles.length; i++){
+                      var title=articles[i].title;
+                      var heading=articles[i].heading;
+                      var date=articles[i].date.split('T')[0];
+                      list += '<li> <a href= "http://rehanad10.imad.hasura-app.io/articles/' + title + '">' + heading + '</a> (' + date + ') </li>';
+                  }
+                  articleList.innerHTML = list;
+                  console.log(articles);
+              } else
+                  alert('Someting went wrong on the server' + request.statusText);
+          }
+        };
+}
 
 
 //submit username, password to login
@@ -86,3 +88,5 @@ register.onclick = function() {
     request.send(JSON.stringify({username: username, password: password}));
     
 };
+
+loadArticles();
