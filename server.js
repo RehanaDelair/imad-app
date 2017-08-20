@@ -144,9 +144,22 @@ app.post('/create-user', function (req, res) {
 
 app.get('/check-login', function (req, res) {
    if (req.session && req.session.auth && req.session.auth.userId) {
-       res.send("You are logged in! " + req.session.auth.userId.toString());
+       
+       pool.query('select username from "user" where id=$1', [req.session.auth.userId.toString()], function(err, result){
+           if(err) {
+               res.status(500).send(err.toString());
+           }
+           else {
+               if(result.rows.length === 0) {
+                   res.status(403).send("You are not logged in!");
+               } else {
+                    res.send(result.rows[0].username);
+               }
+           }
+       });
+       
    } else {
-       res.send("You are not logged in!");
+       res.status(403).send("You are not logged in!");
    }
 });
 
