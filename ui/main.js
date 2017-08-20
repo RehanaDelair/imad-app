@@ -1,4 +1,7 @@
-alert("hi");
+var articleList = document.getElementById('article_list');
+request.open('GET', 'http://rehanad10.imad.hasura-app.io/', true);
+
+
 //submit username, password to login
 var login = document.getElementById('login_btn');
 login.onclick = function() {
