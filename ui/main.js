@@ -13,7 +13,7 @@ request.onreadystatechange = function (){
                   var title=articles[i].title;
                   var heading=articles[i].heading;
                   var date=articles[i].date;
-                  list += '<li> <a href= "http://rehanad10.imad.hasura-app.io/articles/' + title + '">' + heading + '</a> (' + date.toDateString() + ') </li>';
+                  list += '<li> <a href= "http://rehanad10.imad.hasura-app.io/articles/' + title + '">' + heading + '</a> (' + date + ') </li>';
               }
               articleList.innerHTML = list;
               console.log(articles);
