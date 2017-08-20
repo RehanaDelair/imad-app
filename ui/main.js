@@ -10,7 +10,10 @@ request.onreadystatechange = function (){
               articles = JSON.parse(articles);
               list = '';
               for(var i=0; i<articles.length; i++){
-                  list += '<li> <a href= "http://rehanad10.imad.hasura-app.io/articles/' + articles[i].title + '">' + articles[i].heading + '</a> (' + articles[i].date.toDateString() + ') </li>';
+                  var title=articles[i].title;
+                  var heading=articles[i].heading;
+                  var date=articles[i].date;
+                  list += '<li> <a href= "http://rehanad10.imad.hasura-app.io/articles/' + title + '">' + heading + '</a> (' + date.toDateString() + ') </li>';
               }
               articleList.innerHTML = list;
               console.log(articles);
