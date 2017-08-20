@@ -184,12 +184,17 @@ app.get('/submit-name', function (req, res) { // URL: /submit-name?name=xxx
     res.send(JSON.stringify(names));
 });
 
+var articles=[];
 app.get('/get-articles', function(req, res){
     pool.query("select title, heading, date from article", function(err, result) {
         if(err) {
             res.status(500).send(err.toString());
         } else {
-            res.send(result.rows);
+            for(var i=0; i<result.rows.length; i++){
+                var article = result.rows[i];
+                articles.push(article);
+            }
+            res.send(JSON.stringify(articles));
         }
     });
 });
