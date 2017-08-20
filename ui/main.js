@@ -120,7 +120,7 @@ register.onclick = function() {
 };
 
 //check if user is logged in
-checkLogIn();
+checkLogin();
 
 // Load articles
 loadArticles();
