@@ -69,7 +69,7 @@ function createTemplate(data){
     return htmlTemplate;
 }
 
-app.get('/a b', function (req,res){
+app.get('/a%20b', function (req,res){
    res.send("Hello"); 
 });
 
