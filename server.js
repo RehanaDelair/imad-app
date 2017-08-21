@@ -154,7 +154,7 @@ app.get('/check-login', function (req, res) {
            }
            else {
                if(result.rows.length === 0) {
-                   res.status(403).send("You are not logged in!");
+                   res.status(400).send("You are not logged in!");
                } else {
                     res.send(result.rows[0].username);
                }
@@ -162,7 +162,7 @@ app.get('/check-login', function (req, res) {
        });
        
    } else {
-       res.status(403).send("You are not logged in!");
+       res.status(400).send("You are not logged in!");
    }
 });
 
