@@ -69,6 +69,9 @@ function createTemplate(data){
     return htmlTemplate;
 }
 
+app.get('/a b', function (req,res){
+   res.send("Hello"); 
+});
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
