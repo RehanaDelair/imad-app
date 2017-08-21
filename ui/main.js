@@ -37,7 +37,13 @@ function loadLoggedInUser(username) {
 }
 
 function loadLogin() {
-    
+    var login_area = document.getElementById('login');
+    login_area.innerHTML = 
+    `<input type='text' id='username' placeholder='username'/>
+                <input type='password' id='password' placeholder='password'/>
+                <br><br>
+                <input type='submit' value='Login' id='login_btn'/>
+                <input type='submit' value='SignUp' id='register_btn'/>`;
 }
 
 function checkLogin() {
