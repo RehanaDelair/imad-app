@@ -34,6 +34,29 @@ function loadLoggedInUser(username) {
     <br/>
     Hi `+ username;
     
+    var logout = document.getElementById('logout');
+    logout.onclick = function() {
+        
+        //Create a request object
+        var request = new XMLHttpRequest();
+        
+        request.onreadystatechange = function (){
+          if (request.readyState === XMLHttpRequest.DONE){
+              //Take some action
+              if (request.status === 200) {
+                  console.log("user is logged out");
+                  alert(request.responseText);
+                  loadLogIn();
+              } else {
+                  alert('Someting went wrong on the server' + request.statusText);
+              }
+          }
+        };
+        
+        request.open('GET', '/logout', true);
+        
+    };
+    
 }
 
 function loadLogin() {
@@ -45,7 +68,7 @@ function loadLogin() {
                 <input type='submit' value='Login' id='login_btn'/>
                 <input type='submit' value='SignUp' id='register_btn'/>`;
                 
-                //submit username, password to login
+    //submit username, password to login
     var login = document.getElementById('login_btn');
     login.onclick = function() {
         
