@@ -29,12 +29,12 @@ function loadArticles() {
 function loadLoggedInUser(username) {
     var login_area = document.getElementById('login');
     login_area.innerHTML = 
-    `<input type='submit' value='logout' id='logout'/>
+    `<input type='submit' value='logout' id='logout_btn'/>
     <br/>
     <br/>
     Hi `+ username;
     
-    var logout = document.getElementById('logout');
+    var logout = document.getElementById('logout_btn');
     logout.onclick = function() {
         
         //Create a request object
