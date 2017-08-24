@@ -54,7 +54,7 @@ function loadLoggedInUser(username) {
         };
         
         request.open('GET', '/logout', true);
-        
+        request.send();
     };
     
 }
