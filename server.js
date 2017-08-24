@@ -171,11 +171,11 @@ app.get('/logout', function (req, res) {
     res.send("You are logged out!");
 });
 
-var pool = new Pool(config);
+var Pool = new Pool(config);
 app.get('/test-db', function (req, res) {
     //make a select request
     //return a response with the results
-    pool.query("SELECT * from test", function(err, result) {
+    Pool.query("SELECT * from test", function(err, result) {
         if(err) {
             res.status(500).send(err.toString());
         } else {
