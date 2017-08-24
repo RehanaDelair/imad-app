@@ -82,7 +82,7 @@ function loadLogin() {
               if (request.status === 200) {
                   console.log("user is logged in");
                   alert('Login Sucessfull');
-                  loadLoggedInUser();
+                  loadLoggedInUser(username);
               } else if (request.status === 403) {
                  alert('Username/ Password is incorrect');
               } else if (request.status === 500) {
