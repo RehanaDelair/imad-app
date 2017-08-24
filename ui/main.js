@@ -46,7 +46,7 @@ function loadLoggedInUser(username) {
               if (request.status === 200) {
                   console.log("user is logged out");
                   alert(request.responseText);
-                  loadLogIn();
+                  loadLogin();
               } else {
                   alert('Someting went wrong on the server' + request.statusText);
               }
