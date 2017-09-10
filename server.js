@@ -93,7 +93,7 @@ app.post('/login', function (req, res) {
             res.status(500).send(err.toString());
         } else {
             if(result.rows.length === 0){
-                res.status(403).send("Username/ Password is invalid");
+                res.status(403).send(JSON.stringify({"error":"Username/ Password is invalid"}));
             }else{
                 //Match the password
                 var dbString = result.rows[0].password;
@@ -104,9 +104,9 @@ app.post('/login', function (req, res) {
                     //set the session
                     req.session.auth = {userId: result.rows[0].id};
                     
-                    res.send("Sucessfully Logged in!");
+                    res.send(JSON.stringify({"message":"Sucessfully Logged in!"}));
                 } else{
-                    res.status(403).send("Username/ Password is invalid");
+                    res.status(403).send(JSON.stringify({"error":"Username/ Password is invalid"}));
                 }
             }
         }
@@ -129,15 +129,15 @@ app.post('/create-user', function (req, res) {
         } else {
             var count = parseInt(result.rows[0].count);
             if(count > 0){
-                res.send("Username already taken. Choose another Username");
+                res.status(403).send(JSON.stringify({"error":"Username already taken. Choose another Username"}));
             }else if(count === 0){
                 var salt = crypto.randomBytes(128).toString('hex');
                 var dbString= hash(password, salt);
                 pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username, dbString], function (err, result){
                     if(err) {
-                        res.status(500).send(err.toString());
+                        res.status(500).send(JSON.stringify({"error":err.toString()}));
                     } else {
-                        res.send('User sucessfully created'+username);
+                        res.send(JSON.stringify({"message":"User sucessfully created"+username}));
                     }
                 });
             }
