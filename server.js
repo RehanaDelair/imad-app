@@ -210,6 +210,7 @@ app.get('/get-articles', function(req, res){
                 var article = result.rows[i];
                 articles.push(article);
             }
+            res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(articles));
         }
     });
