@@ -200,7 +200,7 @@ app.get('/submit-name', function (req, res) { // URL: /submit-name?name=xxx
     res.send(JSON.stringify(names));
 });
 
-var articles=[];
+/*var articles=[];
 app.get('/get-articles', function(req, res){
     pool.query("select title, heading, date from article", function(err, result) {
         if(err) {
@@ -214,6 +214,19 @@ app.get('/get-articles', function(req, res){
             res.send(JSON.stringify(articles));
         }
     });
+});*/
+
+app.get('/get-articles', function (req, res) {
+   // make a select request
+   // return a response with the results
+   pool.query('SELECT * FROM article ORDER BY date DESC', function (err, result) {
+      if (err) {
+          res.status(500).send(err.toString());
+      } else {
+          res.setHeader('Content-Type', 'application/json');
+          res.send(JSON.stringify(result.rows));
+      }
+   });
 });
 
 app.get('/articles/:articleName',function(req,res){
